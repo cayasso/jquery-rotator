@@ -45,121 +45,122 @@
     // ROTATOR
     var rotator = function (e, options) {
 			
-        var 
-			// Default public values			
-			defaults = {
-				
-				/**
-				 * Rotation delay time
-				 *
-				 * @public
-				 * @property delay
-				 * @type Number
-				 * @default 5000
-				 */
-                delay: 5000,
-								
-				/**
-				 * Transition speed
-				 *
-				 * @public
-				 * @property speed
-				 * @type Number
-				 * @default 1000
-				 */
-                speed: 1000,
-				
-				/**
-				 * Start cycleling, if false it wouldnt cycle
-				 *
-				 * @public
-				 * @property cycle
-				 * @type Boolean
-				 * @default true
-				 */
-                cycle: true,
-				
-				/**
-				 * The starting rotation slide
-				 *
-				 * @public
-				 * @property start_index
-				 * @type Number
-				 * @default 0
-				 */
-                start_index: 0,
-				
-				/**
-				 * Number rotation cycles
-				 *
-				 * @public
-				 * @property cycles
-				 * @type Number
-				 * @default 6
-				 */
-                cycles: 0,
-				
-				/**
-				 * end cycle frame
-				 *
-				 * @public
-				 * @property cycle_end_index
-				 * @type Number
-				 * @default 0
-				 */
-				cycle_end_index: 0
-            },
-						
-		// These are private variables
+		var 
+
+		// Default public values			
+		defaults = {
+			
+			/**
+			 * Rotation delay time
+			 *
+			 * @public
+			 * @property delay
+			 * @type Number
+			 * @default 5000
+			 */
+			delay: 5000,
+							
+			/**
+			 * Transition speed
+			 *
+			 * @public
+			 * @property speed
+			 * @type Number
+			 * @default 1000
+			 */
+			speed: 1000,
+			
+			/**
+			 * Start cycleling, if false it wouldnt cycle
+			 *
+			 * @public
+			 * @property cycle
+			 * @type Boolean
+			 * @default true
+			 */
+			cycle: true,
+			
+			/**
+			 * The starting rotation slide
+			 *
+			 * @public
+			 * @property start_index
+			 * @type Number
+			 * @default 0
+			 */
+			start_index: 0,
+			
+			/**
+			 * Number rotation cycles
+			 *
+			 * @public
+			 * @property cycles
+			 * @type Number
+			 * @default 6
+			 */
+			cycles: 0,
+			
+			/**
+			 * end cycle frame
+			 *
+			 * @public
+			 * @property cycle_end_index
+			 * @type Number
+			 * @default 0
+			 */
+			cycle_end_index: 0
+        },
+					
+	// These are private variables
+	
+		// Get the main element childrens
+        $e = $(e),
 		
-			// Get the main element childrens
-            $e = $(e),
+		//set element childs
+		$childs = $(e).children(),
+		
+		// Initialize next index value
+        next_index = null,
+		
+		// Rotation timer
+        timer, 
+		
+		// Children elements length
+		length = $e.length,
+		
+		// Initialize the slide index
+        index = null,
+		
+		loops = 0,
+		
+		// Define interval variable
+        interval,
+		
+		// Quick initial play delay
+		quickPlayDelay,
+					
+		// Flag
+		flag = true,
+		
+		// Is playing
+		isPlaying = false,
+		
+		// Default events
+		events = {'transition': function(){}, 'cycleEnd': function(){}},
+		
+		// Get options based on user options or defaults
+    	o = $.extend({}, defaults, options)
+		
 			
-			//set element childs
-			$childs = $(e).children(),
-			
-			// Initialize next index value
-            next_index = null,
-			
-			// Rotation timer
-            timer, 
-			
-			// Children elements length
-			length = $e.length,
-			
-			// Initialize the slide index
-            index = null,
-			
-			loops = 0,
-			
-			// Define interval variable
-            interval,
-			
-			// Quick initial play delay
-			quickPlayDelay,
-						
-			// Flag
-			flag = true,
-			
-			// Is playing
-			isPlaying = false,
-			
-			// Default events
-			events = {'transition': function(){}, 'cycleEnd': function(){}},
-			
-			// Get options based on user options or defaults
-        	o = $.extend({}, defaults, options)
-			
-			
-									
-			if ($childs.length) $e = $childs;
-						
-			// If only one child element exit with return, there is nothing to rotate;
-			if ($e.length < 2) return e;
-			
-			next_index = (o.start_index === 0) ? null : o.start_index;
-			
-			var cycles = o.cycles * $e.length;
+								
+		($childs.length) && ($e = $childs)
+					
+		// If only one child element exit with return, there is nothing to rotate;
+		if ($e.length < 2) return e;
+		
+		next_index = (o.start_index === 0) ? null : o.start_index;
+		
+		var cycles = o.cycles * $e.length;
 			
         $e.css('position', 'absolute').hide().parent().css('position', 'relative');
 
