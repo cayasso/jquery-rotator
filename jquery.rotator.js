@@ -114,27 +114,28 @@
 	// These are private variables
 	
 		// Get the main element childrens
-        $e = $(e),
+		$e = $(e),
 		
 		//set element childs
 		$childs = $(e).children(),
 		
 		// Initialize next index value
-        next_index = null,
+		next_index = null,
 		
 		// Rotation timer
-        timer, 
+		timer, 
 		
 		// Children elements length
 		length = $e.length,
 		
 		// Initialize the slide index
-        index = null,
+		index = null,
 		
+		// Number of loops
 		loops = 0,
 		
 		// Define interval variable
-        interval,
+		interval,
 		
 		// Quick initial play delay
 		quickPlayDelay,
@@ -162,7 +163,7 @@
 		
 		var cycles = o.cycles * $e.length;
 			
-        $e.css('position', 'absolute').hide().parent().css('position', 'relative');
+		$e.css('position', 'absolute').hide().parent().css('position', 'relative');
 
 		// Show the start index slide
 		$e.eq(o.start_index).show();
@@ -358,7 +359,7 @@
 		api();
 		
 		// Return the main object
-        return e;
+		return e;
     };
 
 })(jQuery);
