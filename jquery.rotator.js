@@ -38,6 +38,11 @@
 	 */
     $.fn.rotator = function (options) {
         
+		// Check if there are elements, if not just return
+		if (!this.length) {        
+            return this;
+        }
+
 		// Wrap the rotator internal function in the public function
         return new rotator(this, options);
     };
