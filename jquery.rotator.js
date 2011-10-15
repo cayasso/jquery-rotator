@@ -44,7 +44,7 @@
 		}
 
 		// Wrap the rotator internal function in the public function
-        return new rotator(this, options);
+		return new rotator(this, options);
     };
 	
     // ROTATOR
